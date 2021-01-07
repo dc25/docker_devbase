@@ -5,9 +5,9 @@
 
 # see: https://github.com/prabirshrestha/vim-lsp/issues/320
 
-sudo apt-get update 
+apt-get update 
 
 # taken from vim installs
-sudo apt-get install -y \
+apt-get install -y \
     neovim
 

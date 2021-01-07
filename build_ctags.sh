@@ -1,11 +1,11 @@
 #! /bin/bash
 
-sudo apt-get update 
+apt-get update 
 
 
 # from https://docs.ctags.io/en/latest/autotools.html#gnu-linux-distributions
 
-sudo apt install -y \
+apt install -y \
     git gcc make \
     pkg-config autoconf automake \
     python3-docutils \
@@ -23,4 +23,4 @@ cd ctags
 ./autogen.sh
 ./configure 
 make
-sudo make install # may require extra privileges depending on where to install
+make install # may require extra privileges depending on where to install

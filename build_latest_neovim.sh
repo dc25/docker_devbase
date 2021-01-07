@@ -5,17 +5,17 @@
 
 # see: https://github.com/prabirshrestha/vim-lsp/issues/320
 
-sudo apt-get update 
+apt-get update 
 
 # taken from vim installs
-sudo apt-get install -y \
+apt-get install -y \
     git  \
     make  \
     gcc  \
     libncurses5-dev
 
 # additionally needed by neovim
-sudo apt-get install -y      \
+apt-get install -y      \
    cmake                     \
    g++                       \
    pkg-config                \
@@ -31,5 +31,5 @@ cd /tmp
 git clone https://github.com/neovim/neovim.git
 
 cd neovim
-sudo make CMAKE_BUILD_TYPE=RelWithDebInfo
-sudo make install
+make CMAKE_BUILD_TYPE=RelWithDebInfo
+make install
