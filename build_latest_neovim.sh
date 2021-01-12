@@ -5,6 +5,8 @@
 
 # see: https://github.com/prabirshrestha/vim-lsp/issues/320
 
+export DEBIAN_FRONTEND=noninteractive
+
 apt-get update 
 
 # taken from vim installs
@@ -12,7 +14,7 @@ apt-get install -y \
     git  \
     make  \
     gcc  \
-    libncurses5-dev
+    libncurses-dev
 
 # additionally needed by neovim
 apt-get install -y      \
