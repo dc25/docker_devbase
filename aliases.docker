@@ -1,0 +1,38 @@
+## run docker as sudo
+function dockr
+{
+    # podman "$@"
+    sudo docker "$@"
+}
+
+## docker build with 'user' and 'id' arguments
+function dob
+{
+    time \
+    dockr build --build-arg user=`id -u -n` \
+                --build-arg id=`id -u`  \
+                $@
+}
+
+function dx
+{
+  # for podman ( not docker)
+  # Without keep-id, mounted dirs belong to root and can't be accessed.
+  # dockr run -it -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY --network host --privileged --rm -P --userns=keep-id $@
+
+  # for docker ( not podman)
+  dockr run -it -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY --network host --privileged --rm -P                  $@
+}
+
+# customize as needed
+function dxv
+{
+    dx -v ${REPOS}:${REPOS} -w `pwd` $@
+}
+
+# customize as needed
+function dtm
+{
+    dxv $1 tmux 
+}
+
