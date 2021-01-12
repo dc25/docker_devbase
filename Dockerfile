@@ -1,31 +1,44 @@
-FROM sshd
+FROM docker.io/library/ubuntu:20.10
 
-COPY --chown=$USER install_vim.sh /tmp
-RUN sudo /tmp/install_vim.sh
+ENV DEBIAN_FRONTEND noninteractive
 
-COPY --chown=$USER build_latest_vim.sh /tmp
-RUN sudo /tmp/build_latest_vim.sh
+RUN apt-get update && apt-get install -y \
+    net-tools \
+    sudo \
+    tmux \
+    vim
 
-# COPY --chown=$USER install_neovim.sh /tmp
-# RUN sudo /tmp/install_neovim.sh
+######################################################################
+# install some generally useful dev utilities
 
-# Building neovim because vim-lsp "signs" work better with later version.
-# Saw this both in rust and haskell.
-COPY --chown=$USER build_latest_neovim.sh /tmp
-RUN sudo /tmp/build_latest_neovim.sh
+COPY build_ctags.sh /tmp
+RUN /tmp/build_ctags.sh
+
+COPY install_vscode.sh /tmp
+RUN /tmp/install_vscode.sh
+
+######################################################################
+# set up the user
+
+ARG user
+ARG id
+
+# remember for future use; some scripts depend on USER being set
+ENV USER $user
+
+RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' | tee -a /etc/sudoers
+RUN adduser --disabled-password --gecos '' --uid $id $USER 
+RUN adduser $USER sudo 
+
+USER $USER
+
+COPY --chown=$user tmux.conf  /tmp
+RUN cp /tmp/tmux.conf ~/.tmux.conf
 
 COPY --chown=$USER setup_vimrc.sh /tmp
-RUN sudo /tmp/setup_vimrc.sh
-
-COPY --chown=$USER setup_neovimrc.sh /tmp
-RUN sudo /tmp/setup_neovimrc.sh
-
-COPY --chown=$USER build_ctags.sh /tmp
-RUN sudo /tmp/build_ctags.sh
+RUN /tmp/setup_vimrc.sh
 
 COPY --chown=$USER devbaseVimrc /tmp
 RUN cp /tmp/devbaseVimrc ~
 RUN echo so ~/devbaseVimrc | tee -a ~/vimrc
 
-COPY --chown=$USER install_vscode.sh /tmp
-RUN sudo /tmp/install_vscode.sh
