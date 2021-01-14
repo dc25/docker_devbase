@@ -1,8 +1,9 @@
+CONTAINER_PROG=docker
 ## run docker as sudo
 function dockr
 {
     # podman "$@"
-    sudo docker "$@"
+    sudo $CONTAINER_PROG "$@"
 }
 
 ## docker build with 'user' and 'id' arguments
