@@ -1,8 +1,13 @@
-alias cdgit="cd /repos/git"
-alias cdgnc="cd /repos/gitnc"
+alias cdgit="cd /media/veracrypt1/repos/git"
+alias cdgnc="cd /media/veracrypt1/repos/gitnc"
 
-function rebu
+# --no-xshm per: https://github.com/microsoft/vscode/issues/101069
+function vsc
 {
-    find src -type f -name '*.rs' | xargs ls | entr sh -c 'cargo build'
+    /usr/bin/code --no-xshm "$@"
 }
 
+function code
+{
+    echo "code" will have problems in this environment.   Use "vsc" instead.
+}
