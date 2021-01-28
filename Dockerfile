@@ -20,11 +20,10 @@ RUN /tmp/install_vscode.sh
 ######################################################################
 # set up the user
 
-ARG user
 ARG id
 
 # remember for future use; some scripts depend on USER being set
-ENV USER $user
+ENV USER dev
 
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' | tee -a /etc/sudoers
 RUN adduser --disabled-password --gecos '' --uid $id $USER 
@@ -32,7 +31,7 @@ RUN adduser $USER sudo
 
 USER $USER
 
-COPY --chown=$user tmux.conf  /tmp
+COPY --chown=$USER tmux.conf  /tmp
 RUN cp /tmp/tmux.conf ~/.tmux.conf
 
 COPY --chown=$USER setup_vimrc.sh /tmp
@@ -42,3 +41,6 @@ COPY --chown=$USER devbaseVimrc /tmp
 RUN cp /tmp/devbaseVimrc ~
 RUN echo so ~/devbaseVimrc | tee -a ~/vimrc
 
+COPY --chown=$USER myBashrc /tmp
+RUN cp /tmp/myBashrc ~
+RUN echo . ~/myBashrc | tee -a ~/.bashrc
