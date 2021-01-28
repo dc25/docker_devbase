@@ -29,7 +29,14 @@ function cx
 # customize as needed
 function cxv
 {
-    cx -v ${REPOS}:${REPOS} -w `pwd` $@
+    # As of 2021-01-28, '-v ${REPOS}:${REPOS} -w `pwd`' seems to be a little broken for podman.  
+    # Spent a little time trying to get a bug report for podman devs but
+    # eventually gave up.   Problem seemed to be something quite specific to
+    # the nature of my own ${REPOS} directory.
+    #
+    # cx -e REPOS -v ${REPOS}:${REPOS} -w `pwd` $@
+    # cx -e REPOS -v ${REPOS}:${REPOS} $@
+    cx -e REPOS -v `pwd`:`pwd` -w `pwd` $@
 }
 
 # customize as needed
