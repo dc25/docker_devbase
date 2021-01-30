@@ -20,9 +20,9 @@ function cx
 {
   if [[ "podman" = "$CONTAINER_PROG" ]]; then
     # Without keep-id, mounted dirs belong to root and can't be accessed.
-    cnr run -it --network host --privileged --rm -P --userns=keep-id $@
+    cnr run -it -v ${REPOS}:${REPOS} --network host --privileged --rm -P --userns=keep-id $@
   else
-    cnr run -it --network host --privileged --rm -P                  $@
+    cnr run -it -v ${REPOS}:${REPOS} --network host --privileged --rm -P                  $@
   fi
 }
 
