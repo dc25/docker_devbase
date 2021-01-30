@@ -41,7 +41,7 @@ function cxv
     #
     # cx11 -e REPOS -v ${REPOS}:${REPOS} -w `pwd` $@
     # cx11 -e REPOS -v ${REPOS}:${REPOS} $@
-    cx11 -e REPOS -v `pwd`:`pwd` -w `pwd` $@
+    cx11 -v `pwd`:`pwd` -w `pwd` $@
 }
 
 # customize as needed
