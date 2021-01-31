@@ -2,6 +2,12 @@ FROM docker.io/library/ubuntu:20.10
 
 ENV DEBIAN_FRONTEND noninteractive
 
+
+#########################################################################
+#### Sometimes a badly set clock causes problems with apt-get
+###  in this case, run on build machine:  sudo hwclock --hctosys 
+#### Thank you: https://askubuntu.com/a/1169203/1176839
+
 RUN apt-get update && apt-get install -y \
     net-tools \
     sudo \
