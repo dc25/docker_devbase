@@ -23,6 +23,9 @@ RUN /tmp/build_ctags.sh
 COPY install_vscode.sh /tmp
 RUN /tmp/install_vscode.sh
 
+COPY install_neovim.sh /tmp
+RUN /tmp/install_neovim.sh
+
 ######################################################################
 # set up the user
 
@@ -42,6 +45,9 @@ RUN cp /tmp/tmux.conf ~/.tmux.conf
 
 COPY --chown=$USER setup_vimrc.sh /tmp
 RUN /tmp/setup_vimrc.sh
+
+COPY --chown=$USER setup_neovimrc.sh /tmp
+RUN /tmp/setup_neovimrc.sh
 
 COPY --chown=$USER devbaseVimrc /tmp
 RUN cp /tmp/devbaseVimrc ~
