@@ -5,7 +5,7 @@
 
 # see: https://github.com/prabirshrestha/vim-lsp/issues/320
 
-apt-get update 
+apt-get update -y
 
 # taken from vim installs
 apt-get install -y \
