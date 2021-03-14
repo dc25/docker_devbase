@@ -30,9 +30,10 @@ RUN /tmp/install_neovim.sh
 # set up the user
 
 ARG id
+ARG user=dev
 
 # remember for future use; some scripts depend on USER being set
-ENV USER dev
+ENV USER $user
 
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' | tee -a /etc/sudoers
 RUN adduser --disabled-password --gecos '' --uid $id $USER 
