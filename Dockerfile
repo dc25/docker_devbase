@@ -8,52 +8,33 @@ ENV DEBIAN_FRONTEND noninteractive
 ###  in this case, run on build machine:  sudo hwclock --hctosys 
 #### Thank you: https://askubuntu.com/a/1169203/1176839
 
-RUN apt-get update && apt-get install -y \
-    net-tools \
-    sudo \
-    tmux \
-    vim
-
 ######################################################################
-# install some generally useful dev utilities
-
-COPY build_ctags.sh /tmp
-RUN /tmp/build_ctags.sh
-
-COPY install_vscode.sh /tmp
-RUN /tmp/install_vscode.sh
-
-COPY install_neovim.sh /tmp
-RUN /tmp/install_neovim.sh
-
-######################################################################
-# set up the user
 
 ARG id
 ARG user=dev
 
+RUN apt-get update && apt-get install -y \
+    sudo 
+
+# set up the user
+RUN adduser --disabled-password --gecos '' --uid $id $user 
+
+COPY setup_sudo.sh /tmp
+RUN /tmp/setup_sudo.sh $user
+
+USER $user
+
+COPY install_basics.sh /tmp
+RUN sudo /tmp/install_basics.sh
+
+COPY build_ctags.sh /tmp
+RUN sudo /tmp/build_ctags.sh
+
+COPY install_vscode.sh /tmp
+RUN sudo /tmp/install_vscode.sh
+
+COPY --chown=$user setup_home.sh /tmp
+RUN /tmp/setup_home.sh
+
 # remember for future use; some scripts depend on USER being set
 ENV USER $user
-
-RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' | tee -a /etc/sudoers
-RUN adduser --disabled-password --gecos '' --uid $id $USER 
-RUN adduser $USER sudo 
-
-USER $USER
-
-COPY --chown=$USER tmux.conf  /tmp
-RUN cp /tmp/tmux.conf ~/.tmux.conf
-
-COPY --chown=$USER setup_vimrc.sh /tmp
-RUN /tmp/setup_vimrc.sh
-
-COPY --chown=$USER setup_neovimrc.sh /tmp
-RUN /tmp/setup_neovimrc.sh
-
-COPY --chown=$USER devbaseVimrc /tmp
-RUN cp /tmp/devbaseVimrc ~
-RUN echo so ~/devbaseVimrc | tee -a ~/vimrc
-
-COPY --chown=$USER myBashrc /tmp
-RUN cp /tmp/myBashrc ~
-RUN echo . ~/myBashrc | tee -a ~/.bashrc
