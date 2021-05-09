@@ -1,5 +1,10 @@
 #! /bin/bash
 
+function setup_sshkey
+{
+ssh-keygen -N '' -f ~/.ssh/id_rsa <<< y
+}
+
 function setup_tmuxconf
 {
     cat > ~/.tmux.conf << 'DONE'
@@ -68,6 +73,7 @@ DONE
 echo so ~/devbaseVimrc | tee -a ~/vimrc
 }
 
+setup_sshkey
 setup_tmuxconf
 setup_vimrc
 setup_neovimrc
