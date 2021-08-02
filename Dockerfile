@@ -1,6 +1,12 @@
 FROM docker.io/library/ubuntu:20.10
 
+## per https://stackoverflow.com/questions/8671308/non-interactive-method-for-dpkg-reconfigure-tzdata
+## may need work.  refer back to so for details.
 ENV DEBIAN_FRONTEND noninteractive
+ENV DEBCONF_NONINTERACTIVE_SEEN=true
+
+
+## per https://stackoverflow.com/questions/8671308/non-interactive-method-for-dpkg-reconfigure-tzdata
 
 
 #########################################################################
