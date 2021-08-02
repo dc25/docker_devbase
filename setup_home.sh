@@ -45,6 +45,13 @@ cat > ~/myBashrc << 'DONE'
 alias cdgit='cd $REPOS/git'
 alias cdgnc='cd $REPOS/gitnc'
 
+alias ..='cd ..'
+alias ...='cd ...'
+alias ....='cd ....'
+alias .....='cd .....'
+alias ......='cd ......'
+alias .......='cd .......'
+
 # --no-xshm per: https://github.com/microsoft/vscode/issues/101069
 function vsc
 {
@@ -55,6 +62,13 @@ function code
 {
     echo "code" will have problems in this environment.   Use "vsc" instead.
 }
+
+function gitid
+{
+  git config --global user.email "davecompton7@gmail.com"    
+  git config --global user.name "Dave Compton"  
+}
+
 DONE
 echo . ~/myBashrc | tee -a ~/.bashrc
 }
