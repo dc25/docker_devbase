@@ -46,11 +46,11 @@ alias cdgit='cd $REPOS/git'
 alias cdgnc='cd $REPOS/gitnc'
 
 alias ..='cd ..'
-alias ...='cd ...'
-alias ....='cd ....'
-alias .....='cd .....'
-alias ......='cd ......'
-alias .......='cd .......'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
+alias .......='cd ../../../../../..'
 
 # --no-xshm per: https://github.com/microsoft/vscode/issues/101069
 function vsc
