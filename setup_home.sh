@@ -2,7 +2,13 @@
 
 function setup_sshkey
 {
-ssh-keygen -N '' -f ~/.ssh/id_rsa <<< y
+    if  [ -e $HOME/.ssh/id_rsa ] 
+    then
+        echo $HOME/.ssh/id_rsa already exists.
+    else 
+        echo creating $HOME/.ssh/id_rsa 
+        ssh-keygen -N '' -f ~/.ssh/id_rsa <<< y
+    fi
 }
 
 function setup_tmuxconf
