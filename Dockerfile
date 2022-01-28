@@ -29,6 +29,8 @@ COPY setup_sudo.sh /tmp
 RUN /tmp/setup_sudo.sh $user
 
 USER $user
+# remember for future use; some scripts depend on USER being set
+ENV USER $user
 
 COPY install_basics.sh /tmp
 RUN sudo /tmp/install_basics.sh
@@ -39,8 +41,6 @@ RUN sudo /tmp/build_ctags.sh
 COPY install_vscode.sh /tmp
 RUN sudo /tmp/install_vscode.sh
 
-COPY setup_home.sh /tmp
+COPY --chown=$USER setup_home.sh /tmp
 RUN /tmp/setup_home.sh
 
-# remember for future use; some scripts depend on USER being set
-ENV USER $user
