@@ -5,3 +5,12 @@ set ic
 set fileformat=unix
 set encoding=utf-8
 
+map <F8> :'c,.w! $REPOS/tmp/xxx
+map <F9> :r $REPOS/tmp/xxx
+
+" per: https://superuser.com/questions/634326/how-can-i-get-a-block-cursor-in-vim-in-the-cygwin-terminal
+" to get the cursor to be a block
+let &t_ti.="\e[1 q"
+let &t_SI.="\e[5 q"
+let &t_EI.="\e[1 q"
+let &t_te.="\e[0 q"
