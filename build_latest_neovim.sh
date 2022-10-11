@@ -17,21 +17,29 @@ apt-get install -y \
     libncurses-dev
 
 # additionally needed by neovim
-apt-get install -y      \
-   cmake                     \
-   g++                       \
-   pkg-config                \
-   unzip                     \
-   libtool-bin               \
-   libpthread-workqueue-dev  \
-   gettext
+apt-get install -y        \
+    ninja-build           \
+    gettext               \
+    libtool               \
+    libtool-bin           \
+    autoconf              \
+    automake              \
+    cmake                 \
+    g++                   \
+    pkg-config            \
+    unzip                 \
+    curl                  \
+    doxygen
 
-# change to libncurses-dev when switching to ubuntu 18.10
+# additionally needed by neovim in the past - leaving here just in case
+apt-get install -y      \
+   libpthread-workqueue-dev  \
 
 cd /tmp
 
 git clone https://github.com/neovim/neovim.git
 
 cd neovim
+git checkout stable
 make CMAKE_BUILD_TYPE=RelWithDebInfo
 make install
