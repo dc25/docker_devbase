@@ -1,4 +1,7 @@
 #! /bin/bash
 
-echo '%sudo ALL=(ALL) NOPASSWD:ALL' | tee -a /etc/sudoers
-adduser $1 sudo 
+sudo apt-get update -y
+sudo apt-get install -y sudo
+
+echo '%sudo ALL=(ALL) NOPASSWD:ALL' | sudo tee -a /etc/sudoers
+sudo adduser $1 sudo 

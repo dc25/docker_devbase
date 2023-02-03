@@ -7,17 +7,17 @@
 
 export DEBIAN_FRONTEND=noninteractive
 
-apt-get update 
+sudo apt-get update 
 
 # taken from vim installs
-apt-get install -y \
+sudo apt-get install -y \
     git  \
     make  \
     gcc  \
     libncurses-dev
 
 # additionally needed by neovim
-apt-get install -y        \
+sudo apt-get install -y        \
     ninja-build           \
     gettext               \
     libtool               \
@@ -32,7 +32,7 @@ apt-get install -y        \
     doxygen
 
 # additionally needed by neovim in the past - leaving here just in case
-apt-get install -y      \
+sudo apt-get install -y      \
    libpthread-workqueue-dev  \
 
 cd /tmp
@@ -42,4 +42,4 @@ git clone https://github.com/neovim/neovim.git
 cd neovim
 git checkout stable
 make CMAKE_BUILD_TYPE=RelWithDebInfo
-make install
+sudo make install

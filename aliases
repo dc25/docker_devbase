@@ -1,5 +1,5 @@
-# CONTAINER_PROG=docker
-CONTAINER_PROG=podman
+CONTAINER_PROG=docker
+# CONTAINER_PROG=podman
 function cnr
 {
     if [[ "podman" = "$CONTAINER_PROG" ]]; then

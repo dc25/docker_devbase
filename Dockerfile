@@ -20,15 +20,10 @@ ENV DEBCONF_NONINTERACTIVE_SEEN=true
 ARG id
 ARG user=dev
 
-## RUN apt-get remove libappstream3
-## RUN apt-get purge libappstream3
-RUN apt-get update 
-
-RUN apt-get install -y \
-    sudo 
-
 # Added this locale execution and environment to get around some warnings that were showing in nvim checkhealth.
 # Tried moving them into setup_home.sh but (for some reason (?)) that didn't work.
+RUN apt-get update -y 
+
 RUN apt-get install -y \
     locales
 
@@ -48,18 +43,21 @@ USER $user
 # remember for future use; some scripts depend on USER being set
 ENV USER $user
 
-COPY install_basics.sh /tmp
-RUN sudo /tmp/install_basics.sh
+COPY --chown=$USER install_loggedsetup.sh /tmp
+RUN /tmp/install_loggedsetup.sh
 
-COPY build_ctags.sh /tmp
-RUN sudo /tmp/build_ctags.sh
+COPY --chown=$USER install_basics.sh /tmp
+RUN ~/logged_setup.sh /tmp/install_basics.sh
 
-COPY build_latest_neovim.sh /tmp
-RUN sudo /tmp/build_latest_neovim.sh
+COPY --chown=$USER build_ctags.sh /tmp
+RUN ~/logged_setup.sh /tmp/build_ctags.sh
 
-COPY install_vscode.sh /tmp
-RUN sudo /tmp/install_vscode.sh
+COPY --chown=$USER build_latest_neovim.sh /tmp
+RUN ~/logged_setup.sh /tmp/build_latest_neovim.sh
+
+COPY --chown=$USER install_vscode.sh /tmp
+RUN ~/logged_setup.sh /tmp/install_vscode.sh
 
 COPY --chown=$USER setup_home.sh /tmp
-RUN /tmp/setup_home.sh
+RUN ~/logged_setup.sh /tmp/setup_home.sh
 

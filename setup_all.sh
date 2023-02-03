@@ -2,9 +2,10 @@
 export DEBIAN_FRONTEND=noninteractive
 
 sudo ./setup_sudo.sh $USER
-sudo ./install_basics.sh
-sudo ./build_ctags.sh
-sudo ./build_latest_neovim.sh
-sudo ./install_vscode.sh
-./setup_home.sh
+./install_loggedsetup.sh 
+~/logged_setup.sh ./install_basics.sh
+~/logged_setup.sh ./build_ctags.sh
+~/logged_setup.sh ./build_latest_neovim.sh
+~/logged_setup.sh ./install_vscode.sh
+~/logged_setup.sh ./setup_home.sh
 
