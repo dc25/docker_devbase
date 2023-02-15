@@ -47,17 +47,17 @@ COPY --chown=$USER install_loggedsetup.sh /tmp
 RUN /tmp/install_loggedsetup.sh
 
 COPY --chown=$USER install_basics.sh /tmp
-RUN ~/logged_setup.sh /tmp/install_basics.sh
+RUN /tmp/install_basics.sh
 
 COPY --chown=$USER build_ctags.sh /tmp
-RUN ~/logged_setup.sh /tmp/build_ctags.sh
+RUN /tmp/build_ctags.sh
 
 COPY --chown=$USER build_latest_neovim.sh /tmp
-RUN ~/logged_setup.sh /tmp/build_latest_neovim.sh
+RUN /tmp/build_latest_neovim.sh
 
 COPY --chown=$USER install_vscode.sh /tmp
-RUN ~/logged_setup.sh /tmp/install_vscode.sh
+RUN /tmp/install_vscode.sh
 
 COPY --chown=$USER setup_home.sh /tmp
-RUN ~/logged_setup.sh /tmp/setup_home.sh
+RUN /tmp/setup_home.sh
 
