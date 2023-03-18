@@ -45,9 +45,9 @@ function setup_neovimrc
 }
 
 
-function setup_myBashrc
+function setup_devbaseBashrc
 {
-cat > ~/myBashrc << 'DONE'
+cat > ~/devbaseBashrc << 'DONE'
 alias cdgit='cd $REPOS/git'
 alias cdgnc='cd $REPOS/gitnc'
 
@@ -57,6 +57,8 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
 alias .......='cd ../../../../../..'
+
+alias allup="sudo apt update -y; sudo apt upgrade -y; sudo apt autoremove -y"
 
 # --no-xshm per: https://github.com/microsoft/vscode/issues/101069
 function vsc
@@ -76,7 +78,7 @@ function gitid
 }
 
 DONE
-echo . ~/myBashrc | tee -a ~/.bashrc
+echo . ~/devbaseBashrc | tee -a ~/.bashrc
 }
 
 function setup_devbaseVimrc
@@ -108,5 +110,5 @@ setup_sshkey
 setup_tmuxconf
 setup_vimrc
 setup_neovimrc
-setup_myBashrc
+setup_devbaseBashrc
 setup_devbaseVimrc
