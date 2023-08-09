@@ -1,5 +1,6 @@
 ## FROM docker.io/library/ubuntu:21.10
 FROM docker.io/library/ubuntu:22.04
+## FROM docker.io/library/ubuntu:23.04
 
 ## per https://stackoverflow.com/questions/8671308/non-interactive-method-for-dpkg-reconfigure-tzdata
 ## may need work.  refer back to so for details.
@@ -52,11 +53,11 @@ RUN /tmp/install_basics.sh
 COPY --chown=$USER build_ctags.sh /tmp
 RUN /tmp/build_ctags.sh
 
-COPY --chown=$USER build_latest_neovim.sh /tmp
-RUN /tmp/build_latest_neovim.sh
-
 COPY --chown=$USER install_vscode.sh /tmp
 RUN /tmp/install_vscode.sh
+
+COPY --chown=$USER build_latest_neovim.sh /tmp
+RUN /tmp/build_latest_neovim.sh
 
 COPY --chown=$USER setup_home.sh /tmp
 RUN /tmp/setup_home.sh

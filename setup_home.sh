@@ -80,7 +80,8 @@ function gitid
 }
 
 DONE
-echo . ~/devbaseBashrc | tee -a ~/.bashrc
+echo . ~/myBashrc | tee -a ~/.bashrc
+echo . ~/devbaseBashrc | tee -a ~/myBashrc
 }
 
 function setup_devbaseVimrc
