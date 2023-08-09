@@ -50,6 +50,7 @@ function setup_devbaseBashrc
 cat > ~/devbaseBashrc << 'DONE'
 alias cdgit='cd $REPOS/git'
 alias cdgnc='cd $REPOS/gitnc'
+alias cdtmp='cd $REPOS/tmp'
 
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -59,6 +60,7 @@ alias ......='cd ../../../../..'
 alias .......='cd ../../../../../..'
 
 alias allup="sudo apt update -y; sudo apt upgrade -y; sudo apt autoremove -y"
+alias gadsafe='git config --global --add safe.directory `pwd`'
 
 # --no-xshm per: https://github.com/microsoft/vscode/issues/101069
 function vsc
