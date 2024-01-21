@@ -97,6 +97,9 @@ set encoding=utf-8
 map <F8> :'c,.w! $REPOS/tmp/xxx
 map <F9> :r $REPOS/tmp/xxx
 
+map <F11> :call lsp#enable_diagnostics_for_buffer()
+map <F12> :call lsp#disable_diagnostics_for_buffer()
+
 " per: https://superuser.com/questions/634326/how-can-i-get-a-block-cursor-in-vim-in-the-cygwin-terminal
 " to get the cursor to be a block
 let &t_ti.="\e[1 q"
