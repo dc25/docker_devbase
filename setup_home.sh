@@ -50,7 +50,7 @@ function setup_devbaseBashrc
 cat > ~/devbaseBashrc << 'DONE'
 alias cdgit='cd $REPOS/git'
 alias cdgnc='cd $REPOS/gitnc'
-alias cdtmp='cd $REPOS/tmp'
+alias cdtmp='cd $REPOS/../tmp'
 
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -73,12 +73,6 @@ function code
     echo "code" will have problems in this environment.   Use "vsc" instead.
 }
 
-function gitid
-{
-  git config --global user.email "davecompton7@gmail.com"    
-  git config --global user.name "Dave Compton"  
-}
-
 DONE
 echo . ~/myBashrc | tee -a ~/.bashrc
 echo . ~/devbaseBashrc | tee -a ~/myBashrc
@@ -94,8 +88,8 @@ set ic
 set fileformat=unix
 set encoding=utf-8
 
-map <F8> :'c,.w! $REPOS/tmp/xxx
-map <F9> :r $REPOS/tmp/xxx
+map <F8> :'c,.w! $REPOS/../tmp/xxx
+map <F9> :r $REPOS/../tmp/xxx
 
 map <F11> :call lsp#enable_diagnostics_for_buffer()
 map <F12> :call lsp#disable_diagnostics_for_buffer()
