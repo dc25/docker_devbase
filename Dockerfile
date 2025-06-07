@@ -1,6 +1,11 @@
 ## FROM docker.io/library/ubuntu:21.10
-FROM docker.io/library/ubuntu:22.04
+# FROM docker.io/library/ubuntu:22.04
 ## FROM docker.io/library/ubuntu:23.04
+
+# this hack suggested here: https://askubuntu.com/questions/1513927/ubuntu-24-04-docker-images-now-includes-user-ubuntu-with-uid-gid-1000
+FROM docker.io/library/ubuntu:24.04 
+RUN touch /var/mail/ubuntu && chown ubuntu /var/mail/ubuntu && userdel -r ubuntu
+# FROM docker.io/library/ubuntu:24.04
 
 ## per https://stackoverflow.com/questions/8671308/non-interactive-method-for-dpkg-reconfigure-tzdata
 ## may need work.  refer back to so for details.
@@ -35,6 +40,9 @@ ENV LC_ALL en_US.UTF-8
 
 
 # set up the user
+RUN apt-get install -y \
+    adduser
+
 RUN adduser --disabled-password --gecos '' --uid $id $user 
 
 COPY setup_sudo.sh /tmp
