@@ -3,13 +3,14 @@
 ## FROM docker.io/library/ubuntu:23.04
 
 # this hack suggested here: https://askubuntu.com/questions/1513927/ubuntu-24-04-docker-images-now-includes-user-ubuntu-with-uid-gid-1000
-FROM docker.io/library/ubuntu:24.04 
+## FROM docker.io/library/ubuntu:24.04
+FROM docker.io/library/ubuntu:25.10
 RUN touch /var/mail/ubuntu && chown ubuntu /var/mail/ubuntu && userdel -r ubuntu
 # FROM docker.io/library/ubuntu:24.04
 
 ## per https://stackoverflow.com/questions/8671308/non-interactive-method-for-dpkg-reconfigure-tzdata
 ## may need work.  refer back to so for details.
-ENV DEBIAN_FRONTEND noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 ENV DEBCONF_NONINTERACTIVE_SEEN=true
 
 
@@ -34,9 +35,9 @@ RUN apt-get install -y \
     locales
 
 RUN locale-gen en_US.UTF-8  
-ENV LANG en_US.UTF-8  
-ENV LANGUAGE en_US:en  
-ENV LC_ALL en_US.UTF-8  
+ENV LANG=en_US.UTF-8  
+ENV LANGUAGE=en_US:en  
+ENV LC_ALL=en_US.UTF-8  
 
 
 # set up the user
@@ -50,7 +51,7 @@ RUN /tmp/setup_sudo.sh $user
 
 USER $user
 # remember for future use; some scripts depend on USER being set
-ENV USER $user
+ENV USER=$user
 
 COPY --chown=$USER install_loggedsetup.sh /tmp
 RUN /tmp/install_loggedsetup.sh
