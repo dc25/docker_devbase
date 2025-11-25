@@ -1,11 +1,11 @@
-# CONTAINER_PROG=docker
-CONTAINER_PROG=podman
+CONTAINER_PROG=docker
+# CONTAINER_PROG=podman
 function cnr
 {
     if [[ "podman" = "$CONTAINER_PROG" ]]; then
         podman "$@"
     else
-        sudo docker "$@"
+        docker "$@"
     fi
 }
 
@@ -50,8 +50,3 @@ function ctm
     cxv $1 tmux 
 }
 
-function giuse
-{
-    git config --global user.name "$1"
-    git config --global user.email "$2"
-}
