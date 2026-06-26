@@ -21,6 +21,7 @@ set -ag terminal-overrides ',*:cud1=\E[1B'
 # suggested in : https://stackoverflow.com/questions/12312178/tmux-and-vim-escape-key-being-seen-as-and-having-long-delay
 # took care of long delays after pressing esc in both nvim and vim
 set -s escape-time 0
+set -g history-limit 50000
 
 DONE
 
@@ -33,7 +34,7 @@ function setup_vimrc
     touch ~/vimrc
     touch ~/.vimrc
 
-    echo so ~/vimrc | tee -a ~/.vimrc
+    echo so '~/vimrc' | tee -a ~/.vimrc
 }
 
 function setup_neovimrc
@@ -41,7 +42,7 @@ function setup_neovimrc
     touch ~/vimrc
     mkdir -p ~/.config/nvim
     touch ~/.config/nvim/init.vim
-    echo so ~/vimrc | tee -a ~/.config/nvim/init.vim
+    echo so '~/vimrc' | tee -a ~/.config/nvim/init.vim
 }
 
 
@@ -74,8 +75,8 @@ function code
 }
 
 DONE
-echo . ~/myBashrc | tee -a ~/.bashrc
-echo . ~/devbaseBashrc | tee -a ~/myBashrc
+echo . '~/myBashrc' | tee -a ~/.bashrc
+echo . '~/devbaseBashrc' | tee -a ~/myBashrc
 }
 
 function setup_devbaseVimrc
@@ -103,7 +104,7 @@ let &t_te.="\e[0 q"
 
 DONE
 
-echo so ~/devbaseVimrc | tee -a ~/vimrc
+echo so '~/devbaseVimrc' | tee -a ~/vimrc
 }
 
 setup_sshkey
